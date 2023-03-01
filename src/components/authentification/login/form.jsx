@@ -3,7 +3,7 @@ export default function loginForm() {
     <>
       <h1>Connexion</h1>
 
-      <form action="" id="Form-Auth">
+      <form action="" id="Form-Login">
         <div>
           <label htmlFor="email">
             Email

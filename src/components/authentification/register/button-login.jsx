@@ -6,7 +6,6 @@ export default function buttonLogin() {
       <button>
         <NavLink to="/">Se connecter</NavLink>
       </button>
-      <NavLink>Mot de passe oublié ?</NavLink>
     </div>
   );
 }

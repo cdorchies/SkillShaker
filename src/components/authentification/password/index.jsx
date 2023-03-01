@@ -1,13 +1,13 @@
 import Form from "./form";
-import ButtonRegister from "./button-register";
+import ButtonLogin from '../register/button-login'
 import "../index.scss";
 
-export default function login() {
+export default function passwordForgotten() {
   return (
     <article id="SkillShaker-Auth">
       <section id="SkillShaker-Form">
         <Form />
-        <ButtonRegister />
+        <ButtonLogin/>
       </section>
     </article>
   );

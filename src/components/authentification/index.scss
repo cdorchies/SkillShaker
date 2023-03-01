@@ -15,7 +15,9 @@
       margin-bottom: 50px;
       font-size: 1.5em;
     }
-    #Form-Auth {
+    #Form-Register,
+    #Form-Login,
+    #Form-Forgotten-Password {
       max-width: 300px;
       width: 100%;
       div {
@@ -47,7 +49,8 @@
         }
       }
     }
-    // Inscription Bouton
+
+    // Inscription-Connexion Bouton
     #Button-Auth {
       max-width: 300px;
       width: 100%;

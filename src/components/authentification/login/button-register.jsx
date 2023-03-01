@@ -6,7 +6,9 @@ export default function buttonRegister() {
       <button>
         <NavLink to="/register">S'inscrire</NavLink>
       </button>
-      <NavLink>Mot de passe oublié ?</NavLink>
+      <NavLink to="/login/identity/forgotter-password">
+        Mot de passe oublié ?
+      </NavLink>
     </div>
   );
 }

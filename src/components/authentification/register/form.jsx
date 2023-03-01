@@ -1,9 +1,9 @@
-export default function loginForm() {
+export default function registerForm() {
   return (
     <>
       <h1>Inscription</h1>
 
-      <form action="" id="Form-Auth">
+      <form action="" id="Form-Register">
         <div>
           <label htmlFor="email">
             Email
