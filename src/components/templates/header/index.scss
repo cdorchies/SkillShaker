@@ -3,11 +3,39 @@
 #SkillShaker-Header {
   max-width: 1320px;
   width: 100%;
-  margin: 0 auto;
-  
   display: flex;
-  justify-content: center;
-  img {
-    width: 500px;
+  justify-content: space-between;
+  margin: 0 auto;
+  .logo-logged {
+    img {
+      width: 167px;
+      height: 80px;
+    }
+  }
+  .message {
+    display: flex;
+    align-items: center;
+    input {
+      width: 859px;
+      height: 56px;
+      margin-right: 15px;
+      border: 1px solid $grey;
+      border-radius: 10px;
+      outline: none;
+      &::placeholder {
+        color: green;
+      }
+    }
+
+    svg {
+      color: $light;
+      background-color: $skillshaker-red-color;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 50px;
+      width: 40px;
+      height: auto;
+      cursor: pointer;
+    }
   }
 }

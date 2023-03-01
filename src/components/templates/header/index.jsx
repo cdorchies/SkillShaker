@@ -1,12 +1,18 @@
 import { NavLink } from "react-router-dom";
+import Message from "./message";
 import "./index.scss";
 
-export default function header() {
+export default function Header() {
   return (
     <header id="SkillShaker-Header">
-      <NavLink to="/">
-        <img src="assets/img/logo_skillshaker.svg" alt="SkillShaker Logo" />
-      </NavLink>
+      <div className="logo-logged">
+        <NavLink to="/">
+          <img src="assets/img/logo_skillshaker.svg" alt="SkillShaker Logo" />
+        </NavLink>
+      </div>
+      <div className="message">
+        <Message />
+      </div>
     </header>
   );
 }
