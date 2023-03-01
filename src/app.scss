@@ -1,0 +1,12 @@
+@import "./_variables.scss";
+@font-face {
+  font-family: "OpenSans";
+  src: url(../public/assets/fonts/OpenSans.ttf) format("truetype");
+}
+
+#App {
+  min-height: 100vh;
+  padding: 1.5em;
+  background-color: $light-grey;
+  font-family: "OpenSans";
+}
