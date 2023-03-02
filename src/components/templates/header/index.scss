@@ -23,7 +23,11 @@
       border-radius: 10px;
       outline: none;
       &::placeholder {
-        color: green;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 25px;
+        color: $dark-grey;
+        padding-left: 15px;
       }
     }
 

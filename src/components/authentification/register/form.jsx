@@ -1,17 +1,30 @@
+import axios from "axios";
+import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
-  const [details, setDetails] = useState({
+  const navigate = useNavigate();
+  const [users, setUsers] = useState({
     email: "",
     password: "",
     username: "",
   });
-  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(details);
-    navigate(`/`);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/user/new`, users)
+      .then(() => {
+        toast.info(
+          `${users.username}, vous êtes maintenant inscrit à SkillShaker !`
+        );
+        navigate(`/`);
+      })
+      .catch(() => {
+        toast.error(`Votre inscription a échoué...`);
+        console.log(users);
+      });
   };
 
   return (
@@ -26,9 +39,9 @@ export default function RegisterForm() {
               type="text"
               name="email"
               onChange={(e) =>
-                setDetails({ ...details, email: e.target.value })
+                setUsers({ ...users, email: e.target.value })
               }
-              value={details.email}
+              value={users.email}
             />
           </label>
         </div>
@@ -39,9 +52,9 @@ export default function RegisterForm() {
               type="password"
               name="mdp"
               onChange={(e) =>
-                setDetails({ ...details, password: e.target.value })
+                setUsers({ ...users, password: e.target.value })
               }
-              value={details.password}
+              value={users.password}
             />
           </label>
         </div>
@@ -52,9 +65,9 @@ export default function RegisterForm() {
               type="text"
               name="username"
               onChange={(e) =>
-                setDetails({ ...details, username: e.target.value })
+                setUsers({ ...users, username: e.target.value })
               }
-              value={details.username}
+              value={users.username}
             />
           </label>
         </div>

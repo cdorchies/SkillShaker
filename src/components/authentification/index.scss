@@ -20,6 +20,11 @@
     #Form-Forgotten-Password {
       max-width: 300px;
       width: 100%;
+      .error {
+        text-align: center;
+        color: $skillshaker-red-color;
+        margin-bottom: 25px;
+      }
       div {
         label {
           display: flex;

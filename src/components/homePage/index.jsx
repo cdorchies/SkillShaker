@@ -1,4 +1,7 @@
 import User from "../../contexts/userContext";
+import MessagesList from "./messagesList/messages-list";
+import Conversations from "./conversations";
+import Tags from "./tags";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import "./index.scss";
@@ -25,9 +28,10 @@ export default function HomePage() {
   return (
     <article id="SkillShaker-HP">
       {user ? (
-        <section>
-          <h1>HOMEPAGE</h1>
-          <p>This is my homepage</p>
+        <section className="HP">
+          <Conversations/>
+          <MessagesList />
+          <Tags/>
         </section>
       ) : (
         <section className="link-to-connexion">

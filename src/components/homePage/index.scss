@@ -1,6 +1,186 @@
 @import "../../variables";
 
 #SkillShaker-HP {
+  .HP {
+    padding-top: 50px;
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    .conversations {
+      .profileSection {
+        h2 {
+          margin-top: 80px;
+          font-weight: 700;
+          font-size: 24px;
+          margin-bottom: 25px;
+        }
+        .list {
+          ul {
+            li {
+              .profile {
+                display: flex;
+                border-bottom: 1px solid $dark;
+                padding-bottom: 20px;
+                .picture {
+                  margin-right: 15px;
+                  img {
+                    border-radius: 50px;
+                  }
+                }
+                .informationsSection {
+                  margin: 0px 0px 0px 0px;
+                  display: flex;
+                  justify-content: space-around;
+                  font-size: 18px;
+                  .informations {
+                    width: 200px;
+                    .name {
+                      font-weight: 700;
+                      margin-bottom: 5px;
+                      .hourLastMessage {
+                        font-weight: 400;
+                        padding-left: 10px;
+                      }
+                    }
+                    .tags {
+                      margin-bottom: 15px;
+                      color: $skillshaker-red-color;
+                    }
+                  }
+                  .profileIcon {
+                    position: relative;
+                    margin: 0px 0px 0px 0px;
+                    svg {
+                      width: 25px;
+                      height: 35px;
+                      cursor: pointer;
+                    }
+                    .menuConversations,
+                    .menuProfile {
+                      position: absolute;
+                      background-color: $skillshaker-red-color;
+                      left: 9px;
+                      padding: 10px;
+                      color: $light;
+                      font-weight: 700;
+                    }
+                    li {
+                      padding: 10px;
+                    }
+                  }
+                }
+              }
+              .profile.user {
+                border: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .messagesUsers {
+      display: flex;
+      max-width: 564px;
+      margin-bottom: 45px;
+      .profilePic {
+        margin-right: 15px;
+        img {
+          border-radius: 50px;
+        }
+      }
+      .messageBody {
+        .infosUser {
+          display: flex;
+          justify-content: space-between;
+          font-weight: 700;
+          font-size: 18px;
+          margin-bottom: 15px;
+          .infoUserName {
+          }
+          .hourMessage {
+            position: relative;
+            span {
+              svg {
+                cursor: pointer;
+              }
+            }
+            .menuMessage {
+              position: absolute;
+              background-color: $skillshaker-red-color;
+              left: 60px;
+              padding: 10px;
+              color: $light;
+              font-weight: 700;
+              li {
+                padding: 10px;
+              }
+            }
+          }
+        }
+        .fullMessage {
+          text-align: justify;
+          margin-bottom: 15px;
+          font-size: 16px;
+        }
+        .peopleTags {
+          display: flex;
+          justify-content: space-between;
+          font-weight: 700;
+          font-size: 18px;
+          .peopleFollowing {
+            color: $skillshaker-red-color;
+            svg {
+              font-size: 18px;
+            }
+          }
+          .sendMessage {
+            color: $light-blue;
+            svg {
+              font-size: 18px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+
+    .tags {
+      width: 266px;
+      h2 {
+        font-weight: 700;
+        font-size: 24px;
+      }
+      .suggestedTags,
+      .myTags,
+      .refusedTags {
+        margin-top: 5px;
+        border-bottom: 1px solid $dark;
+        padding-top: 15px;
+        padding-bottom: 25px;
+        .titlesTags {
+          display: flex;
+          justify-content: space-between;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 25px;
+          p {
+            svg {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      .suggestedTags {
+        padding-top: 0px;
+      }
+      .refusedTags {
+        border: none;
+      }
+    }
+  }
   .link-to-connexion {
     max-width: 300px;
     padding: 200px 0px 200px 0px;

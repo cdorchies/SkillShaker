@@ -9,7 +9,7 @@ export default function Message() {
         type="text"
         name="message"
         id="SkillShaker-Send-Message"
-        value="Rédiger un message..."
+        placeholder="Rédiger un message..."
       />{" "}
       <MdSend />
     </>
