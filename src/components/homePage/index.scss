@@ -63,11 +63,22 @@
                       background-color: $skillshaker-red-color;
                       left: 9px;
                       padding: 10px;
-                      color: $light;
                       font-weight: 700;
                     }
                     li {
                       padding: 10px;
+                      color: $light;
+                      a,
+                      button {
+                        cursor: pointer;
+                        color: $light;
+                        text-decoration: none;
+                        font-weight: 700;
+                        border: none;
+                        font-size: 18px;
+                        padding: 0;
+                        background-color: $skillshaker-red-color;
+                      }
                     }
                   }
                 }

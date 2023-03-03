@@ -30,7 +30,6 @@ export default function RegisterForm() {
   return (
     <>
       <h1>Inscription</h1>
-
       <form action="" id="Form-Register" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">

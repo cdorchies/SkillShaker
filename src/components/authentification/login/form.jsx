@@ -7,48 +7,39 @@ import User from "../../../contexts/userContext";
 export default function LoginForm() {
   const { setUser } = useContext(User);
   const navigate = useNavigate();
-  const [details, setDetails] = useState({ email: "", password: "" });
+  const [details, setDetails] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post(`${process.env.REACT_APP_API_URL}/login_check`, details)
-      // headers???: {
-      //   "Access-Control-Allow-Origin" : "*",
-      //   "Content-Type": "application/json",
-      //   "api-key": "f802b02c05ab327080dc26db34b1545329be5abeb5a63c50a7"
-      // }
       .then(({ data }) => {
         setUser(data);
-        toast.info(`Vous êtes connecté ${details.email}`);
-        console.log(details);
+        toast.success(`Vous êtes connecté ${details.username}`);
         navigate(`/hp`);
       })
       .catch(() => {
         toast.error(`E-mail ou mot de passe incorrect...`);
         setError("E-mail ou mot de passe incorrect...");
-        console.log(details);
       });
   };
 
   return (
     <>
       <h1>Connexion</h1>
-
-      <form action="" id="Form-Login" onSubmit={handleSubmit}>
+      <form id="Form-Login" onSubmit={handleSubmit}>
         {error !== "" ? <div className="error">{error}</div> : ""}
-
         <div>
-          <label htmlFor="email">
-            Email
+          <label htmlFor="username">
+            E-mail
             <input
               type="text"
-              name="email"
+              name="username"
               onChange={(e) =>
-                setDetails({ ...details, email: e.target.value })
+                setDetails({ ...details, username: e.target.value })
               }
-              value={details.email}
+              value={details.username}
             />
           </label>
         </div>

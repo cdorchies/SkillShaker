@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HeaderAuth from "./components/templates/header-auth";
 import Header from "./components/templates/header";
@@ -8,6 +8,7 @@ import Login from "./components/authentification/login";
 import Register from "./components/authentification/register";
 import Password from "./components/authentification/password";
 import HomePage from "./components//homePage";
+import Profile from "./components/authentification/profile";
 import Footer from "./components/templates/footer";
 import "./app.scss";
 
@@ -16,7 +17,7 @@ import User from "./contexts/userContext";
 
 export default function App() {
   const [user, setUser] = useState(null);
-  // const [user, setUser] = useState(1);
+
   return (
     <main id="App" className="App">
       <ToastContainer position="top-left" autoClose={5000} />
@@ -32,6 +33,7 @@ export default function App() {
               element={<Password />}
             />
             <Route exact path="/hp" element={<HomePage />} />
+            <Route exact path="/profile" element={<Profile />} />
           </Routes>
           <Footer />
         </Router>
