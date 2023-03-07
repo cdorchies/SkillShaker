@@ -2,11 +2,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./index.scss";
 
 // CONTEXT
 import User from "../../../contexts/userContext";
 
-export default function ProfileForm() {
+export default function ProfileForm({ isOpen, onClose }) {
   const { user } = useContext(User);
   const navigate = useNavigate();
   const [infos, setInfos] = useState([]);
@@ -46,7 +47,10 @@ export default function ProfileForm() {
         toast.success(
           `${infos.firstname}, vos modifications ont bien été prises en compte !`
         );
-        navigate(`/hp`);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+        // navigate(`/hp`);
       })
       .catch(() => {
         toast.error(`Une erreur est survenue, veuillez réessayer...`);
@@ -54,11 +58,15 @@ export default function ProfileForm() {
       });
   };
 
+  if (!isOpen) return null;
+
   return (
-    <>
+    <div id="editProfile">
+      <button className="modal-close" onClick={onClose}>
+        X
+      </button>
       <form action="" id="Form-Profil">
         {error !== "" ? <div className="error">{error}</div> : ""}
-
         <div>
           <label htmlFor="firstname">
             Nom d'utilisateur
@@ -72,7 +80,6 @@ export default function ProfileForm() {
             />
           </label>
         </div>
-
         <div>
           <label htmlFor="phoneNumber">
             Numéro de téléphone
@@ -86,7 +93,6 @@ export default function ProfileForm() {
             />
           </label>
         </div>
-
         <div>
           <label htmlFor="description">
             Description
@@ -101,11 +107,10 @@ export default function ProfileForm() {
             ></textarea>
           </label>
         </div>
-
         <div>
           <input type="submit" value="Modifier" onClick={editMyprofil} />
         </div>
       </form>
-    </>
+    </div>
   );
 }

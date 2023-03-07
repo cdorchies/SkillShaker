@@ -35,6 +35,9 @@
                   justify-content: space-around;
                   font-size: 18px;
                   .informations {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
                     width: 200px;
                     .name {
                       font-weight: 700;

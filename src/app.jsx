@@ -8,7 +8,6 @@ import Login from "./components/authentification/login";
 import Register from "./components/authentification/register";
 import Password from "./components/authentification/password";
 import HomePage from "./components//homePage";
-import Profile from "./components/authentification/profile";
 import Footer from "./components/templates/footer";
 import "./app.scss";
 
@@ -20,7 +19,7 @@ export default function App() {
 
   return (
     <main id="App" className="App">
-      <ToastContainer position="top-left" autoClose={5000} />
+      <ToastContainer position="top-left" autoClose={3000} />
       <User.Provider value={{ user, setUser }}>
         <Router>
           {user ? <Header /> : <HeaderAuth />}
@@ -33,7 +32,6 @@ export default function App() {
               element={<Password />}
             />
             <Route exact path="/hp" element={<HomePage />} />
-            <Route exact path="/profile" element={<Profile />} />
           </Routes>
           <Footer />
         </Router>

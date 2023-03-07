@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,8 @@ export default function LoginForm() {
       .then(({ data }) => {
         setUser(data);
         toast.success(`Vous êtes connecté ${details.username}`);
+        const token = data.token;
+        Cookies.set("auth_token", token, { expires: 7 });
         navigate(`/hp`);
       })
       .catch(() => {
