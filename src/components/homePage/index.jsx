@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <article id="SkillShaker-HP">
-      {user ? (
+      {authToken ? (
         <section className="HP">
           <Conversations />
           <MessagesList />

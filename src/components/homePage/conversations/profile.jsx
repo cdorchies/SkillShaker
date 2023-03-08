@@ -52,6 +52,9 @@ export default function Profile() {
     setInfos(response.data);
   }
 
+  // COOKIES
+  const authToken = Cookies.get("auth_token");
+
   useEffect(() => {
     // setTimeout(() => {
     if (user) {

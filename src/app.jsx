@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
+import Cookies from "js-cookie";
 import "react-toastify/dist/ReactToastify.css";
 import HeaderAuth from "./components/templates/header-auth";
 import Header from "./components/templates/header";
@@ -16,13 +17,14 @@ import User from "./contexts/userContext";
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const authToken = Cookies.get("auth_token");
 
   return (
     <main id="App" className="App">
       <ToastContainer position="top-left" autoClose={3000} />
       <User.Provider value={{ user, setUser }}>
         <Router>
-          {user ? <Header /> : <HeaderAuth />}
+          {authToken ? <Header /> : <HeaderAuth />}
           <Routes>
             <Route exact path="/" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
