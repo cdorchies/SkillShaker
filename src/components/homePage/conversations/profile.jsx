@@ -20,6 +20,7 @@ export default function Profile() {
   const handleLogOut = () => {
     setUser(null);
     Cookies.remove("auth_token");
+    localStorage.clear();
     toast.info(`Déconnexion...`);
     navigate("/");
   };
@@ -39,30 +40,39 @@ export default function Profile() {
 
   // API
   const [infos, setInfos] = useState([]);
+  const [error, setError] = useState(null);
 
   async function fetchData() {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/user/info`,
-      {
+    const response = await axios
+      .get(`${process.env.REACT_APP_API_URL}/user/info`, {
         headers: {
           Authorization: "Bearer " + user.token, //the token is a variable which holds the token
         },
-      }
-    );
+      })
+      .catch(() => {
+        setError("Une erreur est survenue...");
+      });
     setInfos(response.data);
   }
 
   // COOKIES
   const authToken = Cookies.get("auth_token");
+  console.log(authToken);
+  console.log(infos.firstname);
 
   useEffect(() => {
-    // setTimeout(() => {
     if (user) {
       fetchData();
     }
-    // }, 1000);
   }, []);
 
+  if (error) {
+    return (
+      <div>
+        <p>Une erreur est survenue... réessayez plus tard !</p>
+      </div>
+    );
+  }
   return (
     <>
       <div className="profileSection">

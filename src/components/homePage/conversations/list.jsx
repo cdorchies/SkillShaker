@@ -24,7 +24,7 @@ export default function List() {
                   <p className="name">
                     User <span className="hourLastMessage">14:05</span>
                   </p>
-                  <p className="tags">#skillshaker</p>
+                  <p className="tags-conversations">#skillshaker</p>
                   <p className="msg">Message.........</p>
                 </div>
                 <div
