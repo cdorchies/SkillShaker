@@ -19,10 +19,12 @@ export default function Profile() {
 
   const handleLogOut = () => {
     setUser(null);
-    Cookies.remove("auth_token");
-    localStorage.clear();
+    const authToken = Cookies.get("auth_token");
+    if (authToken) {
+      Cookies.remove("auth_token");
+    }
     toast.info(`Déconnexion...`);
-    navigate("/");
+    window.location.href = "/";
   };
 
   // MENU - MODAL
@@ -53,6 +55,7 @@ export default function Profile() {
         setError("Une erreur est survenue...");
       });
     setInfos(response.data);
+    console.log(response.data);
   }
 
   // COOKIES
