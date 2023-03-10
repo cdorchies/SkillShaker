@@ -3,9 +3,11 @@ import List from "./list";
 
 export default function Conversations() {
   return (
-    <div className="conversations">
-      <Profile />
-      <List />
+    <div id="conversations">
+      <div className="profileSection">
+        <Profile />
+        <List />
+      </div>
     </div>
   );
 }

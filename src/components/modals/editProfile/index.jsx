@@ -1,7 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { BsFillPersonFill } from "react-icons/bs";
+import { CgPhone } from "react-icons/cg";
+import { MdDescription } from "react-icons/md";
 import "./index.scss";
 
 // CONTEXT
@@ -9,13 +11,7 @@ import User from "../../../contexts/userContext";
 
 export default function ProfileForm({ isOpen, onClose }) {
   const { user } = useContext(User);
-  const navigate = useNavigate();
   const [infos, setInfos] = useState([]);
-  const [isEdit, setIsEdit] = useState({
-    firstname: "",
-    phoneNumber: "",
-    description: "",
-  });
   const [error, setError] = useState("");
 
   // GET
@@ -37,20 +33,19 @@ export default function ProfileForm({ isOpen, onClose }) {
   const editMyprofil = (e) => {
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_API_URL}/user/edit`, isEdit, {
+      .post(`${process.env.REACT_APP_API_URL}/user/edit`, infos, {
         headers: {
           Authorization: "Bearer " + user.token, //the token is a variable which holds the token
         },
       })
       .then(({ data }) => {
-        setIsEdit(data);
+        setInfos(data);
         toast.success(
           `${infos.firstname}, vos modifications ont bien été prises en compte !`
         );
         setTimeout(() => {
           window.location.reload();
         }, 3000);
-        // navigate(`/hp`);
       })
       .catch(() => {
         toast.error(`Une erreur est survenue, veuillez réessayer...`);
@@ -61,56 +56,64 @@ export default function ProfileForm({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div id="editProfile">
-      <button className="modal-close" onClick={onClose}>
-        X
-      </button>
-      <form action="" id="Form-Profil">
-        {error !== "" ? <div className="error">{error}</div> : ""}
-        <div>
-          <label htmlFor="firstname">
-            Nom d'utilisateur
-            <input
-              type="text"
-              name="firstname"
-              onChange={(e) =>
-                setIsEdit({ ...isEdit, firstname: e.target.value })
-              }
-              placeholder={infos.firstname}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="phoneNumber">
-            Numéro de téléphone
-            <input
-              type="text"
-              name="phoneNumber"
-              onChange={(e) =>
-                setIsEdit({ ...isEdit, phoneNumber: e.target.value })
-              }
-              placeholder={infos.phoneNumber}
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="description">
-            Description
-            <textarea
-              name="description"
-              cols="30"
-              rows="10"
-              onChange={(e) =>
-                setIsEdit({ ...isEdit, description: e.target.value })
-              }
-              placeholder={infos.description}
-            ></textarea>
-          </label>
-        </div>
-        <div>
-          <input type="submit" value="Modifier" onClick={editMyprofil} />
-        </div>
-      </form>
+    <div className="overlay">
+      <div id="editProfile">
+        <button className="modal-close" onClick={onClose}>
+          X
+        </button>
+        <form action="" id="Form-Profil">
+          {error !== "" ? <div className="error">{error}</div> : ""}
+          <div>
+            <label htmlFor="firstname">
+              <BsFillPersonFill /> <span className="span-edit-profile">Nom d'utilisateur</span>
+              <input
+                className="edit-input"
+                type="text"
+                name="firstname"
+                value={infos.firstname}
+                onChange={(e) =>
+                  setInfos({ ...infos, firstname: e.target.value })
+                }
+                placeholder={infos.firstname}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="phoneNumber">
+              <CgPhone /> <span className="span-edit-profile">Numéro de téléphone</span>
+              <input
+                className="edit-input"
+                type="text"
+                name="phoneNumber"
+                value={infos.phoneNumber}
+                onChange={(e) =>
+                  setInfos({ ...infos, phoneNumber: e.target.value })
+                }
+                placeholder={infos.phoneNumber}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="description">
+              <MdDescription /> <span className="span-edit-profile">Description</span>
+              <textarea
+                className="description-bloc"
+                name="description"
+                cols="30"
+                rows="10"
+                value={infos.description}
+                onChange={(e) =>
+                  setInfos({ ...infos, description: e.target.value })
+                }
+                placeholder={infos.description}
+              ></textarea>
+            </label>
+          </div>
+          <div className="input-submit-edit">
+            <input type="submit" value="Modifier" onClick={editMyprofil} />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

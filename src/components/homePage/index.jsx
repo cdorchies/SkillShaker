@@ -10,7 +10,6 @@ import "./index.scss";
 export default function HomePage() {
   const { user } = useContext(User);
   const authToken = Cookies.get("auth_token");
-  console.log(authToken);
 
   return (
     <article id="SkillShaker-HP">

@@ -6,7 +6,7 @@ export default function List() {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <div className="profileSection">
+    <div>
       <h2>Conversations</h2>
       <div className="list">
         <ul>

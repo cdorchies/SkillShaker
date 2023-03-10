@@ -3,7 +3,6 @@ import Modal from "../../modals/editProfile/index";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
 import { useState, useContext, useEffect } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 
@@ -22,6 +21,7 @@ export default function Profile() {
     const authToken = Cookies.get("auth_token");
     if (authToken) {
       Cookies.remove("auth_token");
+      Cookies.remove("datas");
     }
     toast.info(`Déconnexion...`);
     window.location.href = "/";
@@ -55,13 +55,13 @@ export default function Profile() {
         setError("Une erreur est survenue...");
       });
     setInfos(response.data);
-    console.log(response.data);
   }
 
   // COOKIES
+  // Cookies.set("datas", infos, { expires: 7 });
   const authToken = Cookies.get("auth_token");
-  console.log(authToken);
-  console.log(infos.firstname);
+  // const datas = Cookies.get("datas");
+  // console.log(datas)
 
   useEffect(() => {
     if (user) {
@@ -76,16 +76,19 @@ export default function Profile() {
       </div>
     );
   }
+
+  // const imageProfile = `https://api.skill-shaker.com/api/user/info/${infos.image}`;
+
   return (
     <>
-      <div className="profileSection">
+      <div>
         <div className="list">
           <ul>
             <li>
               <div className="profile user">
                 <div className="picture">
                   <img
-                    src="https://picsum.photos/50/50"
+                    src="https://picsum.photos/70/70"
                     alt="Photo de profil"
                     className="profilePicture"
                   />
