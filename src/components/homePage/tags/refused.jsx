@@ -35,6 +35,20 @@ export default function Suggested() {
     setTags(response.data.refusedTags);
   }
 
+  // LOCAL STORAGE
+  if (typeof Storage !== "undefined") {
+    if (tags.length === 0) {
+      let refusedTags = localStorage.getItem("refusedTags");
+      if (refusedTags != undefined || refusedTags != null) {
+        setTags(JSON.parse(refusedTags));
+      }
+    } else {
+      localStorage.setItem("refusedTags", JSON.stringify(tags));
+    }
+  } else {
+    console.log("Erreur....");
+  }
+
   useEffect(() => {
     if (user) {
       fetchData();
@@ -52,7 +66,7 @@ export default function Suggested() {
   return (
     <div className="refusedTags">
       <div className="titlesTags">
-        <h3>Tags refusés (3)</h3>
+        <h3>Tags refusés ({tags.length})</h3>
         <p onClick={toggleOpen}>
           {isOpen ? <AiOutlineMinus /> : <HiOutlinePlus />}
         </p>

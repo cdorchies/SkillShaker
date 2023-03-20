@@ -2,7 +2,6 @@ import axios from "axios";
 import Modal from "../../modals/editProfile/index";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 
@@ -21,7 +20,6 @@ export default function Profile() {
     const authToken = Cookies.get("auth_token");
     if (authToken) {
       Cookies.remove("auth_token");
-      Cookies.remove("datas");
     }
     toast.info(`Déconnexion...`);
     window.location.href = "/";
@@ -37,18 +35,15 @@ export default function Profile() {
     setIsModalOpen(false);
   };
 
-  // ROUTER NAVIGATE
-  const navigate = useNavigate();
-
   // API
-  const [infos, setInfos] = useState([]);
+  const [infos, setInfos] = useState(null);
   const [error, setError] = useState(null);
 
   async function fetchData() {
     const response = await axios
       .get(`${process.env.REACT_APP_API_URL}/user/info`, {
         headers: {
-          Authorization: "Bearer " + user.token, //the token is a variable which holds the token
+          Authorization: "Bearer " + user.token,
         },
       })
       .catch(() => {
@@ -57,17 +52,25 @@ export default function Profile() {
     setInfos(response.data);
   }
 
-  // COOKIES
-  // Cookies.set("datas", infos, { expires: 7 });
-  const authToken = Cookies.get("auth_token");
-  // const datas = Cookies.get("datas");
-  // console.log(datas)
-
   useEffect(() => {
     if (user) {
       fetchData();
     }
   }, []);
+
+  // LOCAL STORAGE
+  if (typeof Storage !== "undefined") {
+    if (infos === undefined || infos === null) {
+      let infoGet = localStorage.getItem("info");
+      if (infoGet != undefined || infoGet != null) {
+        setInfos(JSON.parse(infoGet));
+      }
+    } else {
+      localStorage.setItem("info", JSON.stringify(infos));
+    }
+  } else {
+    console.log("Erreur....");
+  }
 
   if (error) {
     return (
@@ -78,7 +81,6 @@ export default function Profile() {
   }
 
   // const imageProfile = `https://api.skill-shaker.com/api/user/info/${infos.image}`;
-
   return (
     <>
       <div>
@@ -95,9 +97,13 @@ export default function Profile() {
                 </div>
                 <div className="informationsSection">
                   <div className="informations">
-                    <p className="name">{infos.firstname}</p>
+                    <p className="name">
+                      {infos ? infos.firstname : "Loading..."}
+                    </p>
                     {/* substr à faire ici  */}
-                    <p className="email">{infos.description}</p>
+                    <p className="email">
+                      {infos ? infos.description : "Loading..."}
+                    </p>
                   </div>
                   <div
                     className="profileIcon"

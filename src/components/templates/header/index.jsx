@@ -7,7 +7,7 @@ export default function Header() {
     <header id="SkillShaker-Header">
       <div className="logo-logged">
         <NavLink to="/">
-          <img src="assets/img/logo_skillshaker.svg" alt="SkillShaker Logo" />
+          <img src="assets/img/logo_skillshaker.png" alt="SkillShaker Logo" />
         </NavLink>
       </div>
       <div className="message">

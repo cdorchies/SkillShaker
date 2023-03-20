@@ -35,6 +35,20 @@ export default function Suggested() {
     setTags(response.data.myTags);
   }
 
+  // LOCAL STORAGE
+  if (typeof Storage !== "undefined") {
+    if (tags.length === 0) {
+      let acceptedTags = localStorage.getItem("acceptedTags");
+      if (acceptedTags != undefined || acceptedTags != null) {
+        setTags(JSON.parse(acceptedTags));
+      }
+    } else {
+      localStorage.setItem("acceptedTags", JSON.stringify(tags));
+    }
+  } else {
+    console.log("Erreur....");
+  }
+
   useEffect(() => {
     if (user) {
       fetchData();

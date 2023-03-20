@@ -1,9 +1,60 @@
-import { useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import Menu from "./menuConversations";
+import axios from "axios";
+import { useState, useContext, useEffect } from "react";
+
+// CONTEXT
+import User from "../../../contexts/userContext";
 
 export default function List() {
+  // CONTEXT
+  const { user } = useContext(User);
   const [openMenu, setOpenMenu] = useState(false);
+
+  // API
+  const [conversations, setConversations] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/message/get/feed`, {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        })
+        .then((res) => {
+          const dataArray = Object.values(res.data);
+          setConversations(dataArray);
+        })
+        .catch(() => {
+          setError("Une erreur est survenue...");
+        });
+    }
+  }, []);
+
+  // conversations.forEach((element) => {
+  //   // element.forEach((el) => {
+  //   console.log(element);
+  //   // });
+  // });
+
+  // if (conversations.length === 0) {
+  //   let messageFeed = Cookies.get("messageFeed");
+  //   if (messageFeed != undefined || messageFeed != null) {
+  //     setConversations(JSON.parse(messageFeed));
+  //   }
+  // } else {
+  //   Cookies.set("messageFeed", JSON.stringify(conversations), { expires: 7 });
+  // }
+
+  if (error) {
+    return (
+      <div>
+        <p>Une erreur est survenue... réessayez plus tard !</p>
+      </div>
+    );
+  }
 
   return (
     <div>

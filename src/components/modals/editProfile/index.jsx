@@ -11,7 +11,7 @@ import User from "../../../contexts/userContext";
 
 export default function ProfileForm({ isOpen, onClose }) {
   const { user } = useContext(User);
-  const [infos, setInfos] = useState([]);
+  const [infos, setInfos] = useState(null);
   const [error, setError] = useState("");
 
   // GET
@@ -20,7 +20,7 @@ export default function ProfileForm({ isOpen, onClose }) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/user/info`, {
           headers: {
-            Authorization: "Bearer " + user.token, //the token is a variable which holds the token
+            Authorization: "Bearer " + user.token,
           },
         })
         .then(({ data }) => {
@@ -35,7 +35,7 @@ export default function ProfileForm({ isOpen, onClose }) {
     axios
       .post(`${process.env.REACT_APP_API_URL}/user/edit`, infos, {
         headers: {
-          Authorization: "Bearer " + user.token, //the token is a variable which holds the token
+          Authorization: "Bearer " + user.token,
         },
       })
       .then(({ data }) => {
@@ -53,6 +53,20 @@ export default function ProfileForm({ isOpen, onClose }) {
       });
   };
 
+  // LOCAL STORAGE
+  if (typeof Storage !== "undefined") {
+    if (infos === undefined || infos === null) {
+      let infoGet = localStorage.getItem("infosEditProfile");
+      if (infoGet != undefined || infoGet != null) {
+        setInfos(JSON.parse(infoGet));
+      }
+    } else {
+      localStorage.setItem("infosEditProfile", JSON.stringify(infos));
+    }
+  } else {
+    console.log("Erreur....");
+  }
+
   if (!isOpen) return null;
 
   return (
@@ -65,7 +79,8 @@ export default function ProfileForm({ isOpen, onClose }) {
           {error !== "" ? <div className="error">{error}</div> : ""}
           <div>
             <label htmlFor="firstname">
-              <BsFillPersonFill /> <span className="span-edit-profile">Nom d'utilisateur</span>
+              <BsFillPersonFill />{" "}
+              <span className="span-edit-profile">Nom d'utilisateur</span>
               <input
                 className="edit-input"
                 type="text"
@@ -80,7 +95,8 @@ export default function ProfileForm({ isOpen, onClose }) {
           </div>
           <div>
             <label htmlFor="phoneNumber">
-              <CgPhone /> <span className="span-edit-profile">Numéro de téléphone</span>
+              <CgPhone />{" "}
+              <span className="span-edit-profile">Numéro de téléphone</span>
               <input
                 className="edit-input"
                 type="text"
@@ -95,7 +111,8 @@ export default function ProfileForm({ isOpen, onClose }) {
           </div>
           <div>
             <label htmlFor="description">
-              <MdDescription /> <span className="span-edit-profile">Description</span>
+              <MdDescription />{" "}
+              <span className="span-edit-profile">Description</span>
               <textarea
                 className="description-bloc"
                 name="description"

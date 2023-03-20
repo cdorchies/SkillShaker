@@ -35,6 +35,20 @@ export default function MessagesList() {
     }
   }, []);
 
+  // LOCAL STORAGE
+  if (typeof Storage !== "undefined") {
+    if (messages.length === 0) {
+      let messageFeed = localStorage.getItem("messageFeed");
+      if (messageFeed != undefined || messageFeed != null) {
+        setMessages(JSON.parse(messageFeed));
+      }
+    } else {
+      localStorage.setItem("messageFeed", JSON.stringify(messages));
+    }
+  } else {
+    console.log("Erreur....");
+  }
+
   if (error) {
     return (
       <div>
@@ -42,6 +56,21 @@ export default function MessagesList() {
       </div>
     );
   }
+
+  // STYLISER LES TAGS
+  messages.forEach((message) => {
+    let string = message.message;
+    const regex = /#\w+/g;
+    let motsHashtags = string.match(regex);
+    let newTag = string.replace(
+      string,
+      `<span className="messageTag">${motsHashtags}</span>`
+    );
+    console.log(newTag);
+  });
+
+  const regex = /#\w+/g;
+
   return (
     <div id="messagesUsers">
       {messages ? (
@@ -68,10 +97,12 @@ export default function MessagesList() {
                 </div>
                 <div className="fullMessage">
                   <p>{message.message}</p>
+                  {/* <p>{message.message.match(regex)}</p> */}
                 </div>
                 <div className="peopleTags">
                   <div className="peopleFollowing">
-                    <BsPeopleFill /> {message.conversation.length}/
+                    <BsPeopleFill />{" "}
+                    {message.conversation ? message.conversation.length : "0"}/
                     {message.audience}
                   </div>
                   <div className="sendMessage">
@@ -83,7 +114,9 @@ export default function MessagesList() {
           );
         })
       ) : (
-        <div>Aucun nouveau message</div>
+        <div>
+          <p className="no-new-messages">Aucun nouveau message...</p>
+        </div>
       )}
     </div>
   );

@@ -5,7 +5,7 @@ export default function HeaderAuth() {
   return (
     <header id="SkillShaker-Header-Auth">
       <NavLink to="/">
-        <img src="assets/img/logo_skillshaker.svg" alt="SkillShaker Logo" />
+        <img src="assets/img/logo_skillshaker.png" alt="SkillShaker Logo" />
       </NavLink>
     </header>
   );
