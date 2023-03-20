@@ -37,6 +37,7 @@ export default function ProfileForm({ isOpen, onClose }) {
         headers: {
           Authorization: "Bearer " + user.token,
         },
+        value: infos,
       })
       .then(({ data }) => {
         setInfos(data);

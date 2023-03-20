@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import User from "../../../contexts/userContext";
 
 export default function LoginForm() {
-  const { setUser } = useContext(User);
+  const { user, setUser } = useContext(User);
   const navigate = useNavigate();
   const [details, setDetails] = useState({ username: "", password: "" });
   const [error, setError] = useState("");

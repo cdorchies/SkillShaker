@@ -6,7 +6,6 @@ export default function LoginForm() {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(details);
   };
   return (
     <>

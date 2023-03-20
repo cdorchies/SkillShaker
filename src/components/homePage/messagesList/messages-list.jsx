@@ -66,7 +66,6 @@ export default function MessagesList() {
       string,
       `<span className="messageTag">${motsHashtags}</span>`
     );
-    console.log(newTag);
   });
 
   const regex = /#\w+/g;

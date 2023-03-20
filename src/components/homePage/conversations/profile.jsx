@@ -81,6 +81,7 @@ export default function Profile() {
   }
 
   // const imageProfile = `https://api.skill-shaker.com/api/user/info/${infos.image}`;
+  // console.log(infos);
   return (
     <>
       <div>
@@ -88,6 +89,28 @@ export default function Profile() {
           <ul>
             <li>
               <div className="profile user">
+                <div
+                  className="profileIcon"
+                  onClick={() => setOpenMenu((prev) => !prev)}
+                >
+                  <HiDotsVertical />
+                  {openMenu && (
+                    <>
+                      <ul className="menuProfile">
+                        <li>
+                          <button type="button" onClick={handleModalOpen}>
+                            Mon profil
+                          </button>
+                        </li>
+                        <li>
+                          <button type="button" onClick={handleLogOut}>
+                            Déconnexion
+                          </button>
+                        </li>
+                      </ul>
+                    </>
+                  )}
+                </div>
                 <div className="picture">
                   <img
                     src="https://picsum.photos/70/70"
@@ -104,28 +127,6 @@ export default function Profile() {
                     <p className="email">
                       {infos ? infos.description : "Loading..."}
                     </p>
-                  </div>
-                  <div
-                    className="profileIcon"
-                    onClick={() => setOpenMenu((prev) => !prev)}
-                  >
-                    <HiDotsVertical />
-                    {openMenu && (
-                      <>
-                        <ul className="menuProfile">
-                          <li>
-                            <button type="button" onClick={handleModalOpen}>
-                              Mon profil
-                            </button>
-                          </li>
-                          <li>
-                            <button type="button" onClick={handleLogOut}>
-                              Déconnexion
-                            </button>
-                          </li>
-                        </ul>
-                      </>
-                    )}
                   </div>
                 </div>
               </div>

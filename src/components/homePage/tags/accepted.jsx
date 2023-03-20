@@ -12,7 +12,7 @@ export default function Suggested() {
   // CONTEXT
   const { user } = useContext(User);
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
     setIsOpen((prevState) => !prevState);

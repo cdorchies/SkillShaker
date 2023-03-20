@@ -23,7 +23,6 @@ export default function RegisterForm() {
       })
       .catch(() => {
         toast.error(`Votre inscription a échoué...`);
-        console.log(users);
       });
   };
 

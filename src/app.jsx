@@ -35,6 +35,20 @@ export default function App() {
     }
   }, []);
 
+  // LOCAL STORAGE
+  if (typeof Storage !== "undefined") {
+    if (user === undefined || user === null) {
+      let infoGet = localStorage.getItem("userToken");
+      if (infoGet != undefined || infoGet != null) {
+        setUser(JSON.parse(infoGet));
+      }
+    } else {
+      localStorage.setItem("userToken", JSON.stringify(user));
+    }
+  } else {
+    console.log("Erreur....");
+  }
+
   return (
     <main id="App" className={"App " + appClass}>
       <ToastContainer position="top-left" autoClose={3000} />

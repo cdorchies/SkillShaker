@@ -33,21 +33,6 @@ export default function List() {
     }
   }, []);
 
-  // conversations.forEach((element) => {
-  //   // element.forEach((el) => {
-  //   console.log(element);
-  //   // });
-  // });
-
-  // if (conversations.length === 0) {
-  //   let messageFeed = Cookies.get("messageFeed");
-  //   if (messageFeed != undefined || messageFeed != null) {
-  //     setConversations(JSON.parse(messageFeed));
-  //   }
-  // } else {
-  //   Cookies.set("messageFeed", JSON.stringify(conversations), { expires: 7 });
-  // }
-
   if (error) {
     return (
       <div>

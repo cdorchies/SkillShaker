@@ -22,13 +22,51 @@
           ul {
             li {
               .profile {
+                position: relative;
                 display: flex;
+                flex-direction: column;
                 justify-content: space-between;
                 padding-bottom: 20px;
+                text-align: center;
                 .picture {
-                  margin-right: 15px;
+                  margin: 0 auto;
+                  padding-bottom: 15px;
                   img {
                     border-radius: 50px;
+                  }
+                }
+                .profileIcon {
+                  margin: 0px 0px 0px 0px;
+                  position: absolute;
+                  right: 0;
+                  svg {
+                    width: 25px;
+                    height: 35px;
+                    cursor: pointer;
+                  }
+                  .menuConversations,
+                  .menuProfile {
+                    position: absolute;
+                    background-color: $skillshaker-red-color;
+                    left: 13px;
+                    text-align: left;
+                    padding: 10px;
+                    font-weight: 700;
+                  }
+                  li {
+                    padding: 10px;
+                    color: $light;
+                    a,
+                    button {
+                      cursor: pointer;
+                      color: $light;
+                      text-decoration: none;
+                      font-weight: 700;
+                      border: none;
+                      font-size: 18px;
+                      padding: 0;
+                      background-color: $skillshaker-red-color;
+                    }
                   }
                 }
                 .informationsSection {
@@ -52,38 +90,6 @@
                     .tags-conversations {
                       margin-bottom: 15px;
                       color: $skillshaker-red-color;
-                    }
-                  }
-                  .profileIcon {
-                    position: relative;
-                    margin: 0px 0px 0px 0px;
-                    svg {
-                      width: 25px;
-                      height: 35px;
-                      cursor: pointer;
-                    }
-                    .menuConversations,
-                    .menuProfile {
-                      position: absolute;
-                      background-color: $skillshaker-red-color;
-                      left: 9px;
-                      padding: 10px;
-                      font-weight: 700;
-                    }
-                    li {
-                      padding: 10px;
-                      color: $light;
-                      a,
-                      button {
-                        cursor: pointer;
-                        color: $light;
-                        text-decoration: none;
-                        font-weight: 700;
-                        border: none;
-                        font-size: 18px;
-                        padding: 0;
-                        background-color: $skillshaker-red-color;
-                      }
                     }
                   }
                 }
