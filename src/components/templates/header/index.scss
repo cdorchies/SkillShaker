@@ -14,37 +14,4 @@
       height: 80px;
     }
   }
-  .message {
-    display: flex;
-    width: 859px;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    input {
-      width: 100%;
-      height: 56px;
-      margin-right: 15px;
-      border: 1px solid $grey;
-      border-radius: 10px;
-      outline: none;
-      &::placeholder {
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 25px;
-        color: $dark-grey;
-        padding-left: 15px;
-      }
-    }
-
-    svg {
-      color: $light;
-      background-color: $skillshaker-red-color;
-      padding: 10px;
-      font-size: 18px;
-      border-radius: 50px;
-      width: 40px;
-      height: auto;
-      cursor: pointer;
-    }
-  }
 }

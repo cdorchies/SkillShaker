@@ -42,7 +42,7 @@ export default function List() {
   }
 
   return (
-    <div>
+    <>
       <h2>Conversations</h2>
       <div className="list">
         <ul>
@@ -75,6 +75,6 @@ export default function List() {
           </li>
         </ul>
       </div>
-    </div>
+    </>
   );
 }

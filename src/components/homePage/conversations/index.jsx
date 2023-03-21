@@ -6,6 +6,8 @@ export default function Conversations() {
     <div id="conversations">
       <div className="profileSection">
         <Profile />
+      </div>
+      <div className="conversationsSection">
         <List />
       </div>
     </div>

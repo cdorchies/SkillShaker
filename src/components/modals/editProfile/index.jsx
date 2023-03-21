@@ -3,13 +3,14 @@ import { toast } from "react-toastify";
 import { useState, useContext, useEffect } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { CgPhone } from "react-icons/cg";
+import { IoImage } from "react-icons/io5";
 import { MdDescription } from "react-icons/md";
 import "./index.scss";
 
 // CONTEXT
 import User from "../../../contexts/userContext";
 
-export default function ProfileForm({ isOpen, onClose }) {
+export default function ProfileForm(props) {
   const { user } = useContext(User);
   const [infos, setInfos] = useState(null);
   const [error, setError] = useState("");
@@ -68,16 +69,32 @@ export default function ProfileForm({ isOpen, onClose }) {
     console.log("Erreur....");
   }
 
-  if (!isOpen) return null;
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
 
   return (
-    <div className="overlay">
-      <div id="editProfile">
-        <button className="modal-close" onClick={onClose}>
+    <div className="overlay" onClick={props.onClose}>
+      <div id="editProfile" onClick={handleClick}>
+        <button className="modal-close" onClick={props.onClose}>
           X
         </button>
         <form action="" id="Form-Profil">
           {error !== "" ? <div className="error">{error}</div> : ""}
+          {/* <div>
+            <label htmlFor="profilImg">
+              <IoImage />{" "}
+              <span className="span-edit-profile">Image de profil</span>
+              <input
+                className="edit-input"
+                type="file"
+                name="profilImg"
+                onChange={(e) =>
+                  setInfos({ ...infos, profilImg: e.target.value })
+                }
+              />
+            </label>
+          </div> */}
           <div>
             <label htmlFor="firstname">
               <BsFillPersonFill />{" "}
@@ -86,11 +103,9 @@ export default function ProfileForm({ isOpen, onClose }) {
                 className="edit-input"
                 type="text"
                 name="firstname"
-                value={infos.firstname}
                 onChange={(e) =>
                   setInfos({ ...infos, firstname: e.target.value })
                 }
-                placeholder={infos.firstname}
               />
             </label>
           </div>
@@ -102,11 +117,9 @@ export default function ProfileForm({ isOpen, onClose }) {
                 className="edit-input"
                 type="text"
                 name="phoneNumber"
-                value={infos.phoneNumber}
                 onChange={(e) =>
                   setInfos({ ...infos, phoneNumber: e.target.value })
                 }
-                placeholder={infos.phoneNumber}
               />
             </label>
           </div>
@@ -119,11 +132,9 @@ export default function ProfileForm({ isOpen, onClose }) {
                 name="description"
                 cols="30"
                 rows="10"
-                value={infos.description}
                 onChange={(e) =>
                   setInfos({ ...infos, description: e.target.value })
                 }
-                placeholder={infos.description}
               ></textarea>
             </label>
           </div>

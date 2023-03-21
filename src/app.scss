@@ -8,6 +8,7 @@
   position: relative;
   min-height: 100vh;
   font-family: "OpenSans";
+  padding: 0px 20px 0px 20px;
 }
 
 // DARK LIGHT MODE
@@ -62,22 +63,50 @@
       }
     }
   }
-  #SkillShaker-Header .message input {
-    background-color: $dark-grey;
-    border: 1px solid $dark;
-    &::placeholder {
-      color: $grey;
-    }
-  }
   #SkillShaker-HP {
     .HP {
+      #messagesUsers {
+        .message input {
+          background-color: $dark-grey;
+          border: 1px solid $dark;
+          &::placeholder {
+            color: $grey;
+          }
+        }
+      }
       .profileSection,
       .messageUser,
-      .tags {
+      .tags,
+      .conversationsSection {
         box-shadow: 0px 0px 13px -3px $light;
         border: 1px solid $dark;
+        .list {
+          ul {
+            li {
+              .profile {
+                border-bottom: 1px solid $dark;
+              }
+            }
+          }
+        }
       }
       .profileSection {
+        .background-profile {
+          background-color: $dark-grey;
+        }
+        .profile.user {
+          .picture {
+            img {
+              border: 1px solid $light;
+            }
+          }
+          .profileIcon {
+            svg {
+              color: $dark;
+            }
+          }
+        }
+
         .overlay {
           #editProfile {
             border: 1px solid $dark-grey;
@@ -117,15 +146,6 @@
             color: $light-mode;
           }
         }
-        .list {
-          ul {
-            li {
-              .profile {
-                border-bottom: 1px solid $light;
-              }
-            }
-          }
-        }
       }
       .tags {
         .suggestedTags,
@@ -146,22 +166,49 @@
     border-right: 1px solid $grey;
     background-color: $light-mode;
   }
-  #SkillShaker-Header .message input {
-    background-color: transparent;
-    border: 1px solid $grey;
-    &::placeholder {
-      color: $grey;
-    }
-  }
   #SkillShaker-HP {
     .HP {
+      #messagesUsers {
+        .message input {
+          background-color: transparent;
+          border: 1px solid $grey;
+          &::placeholder {
+            color: $grey;
+          }
+        }
+      }
       .profileSection,
       .messageUser,
-      .tags {
+      .tags,
+      .conversationsSection {
         box-shadow: 0px 0px 13px -3px $dark;
         border: 1px solid $grey;
+        .list {
+          ul {
+            li {
+              .profile {
+                border-bottom: 1px solid $dark;
+              }
+            }
+          }
+        }
       }
       .profileSection {
+        .background-profile {
+          background-color: $skillshaker-red-color;
+        }
+        .profile.user {
+          .picture {
+            img {
+              border: 1px solid $light;
+            }
+          }
+          .profileIcon {
+            svg {
+              color: $light;
+            }
+          }
+        }
         .overlay {
           #editProfile {
             border: 1px solid $grey;

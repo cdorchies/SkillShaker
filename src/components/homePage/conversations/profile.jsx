@@ -80,61 +80,53 @@ export default function Profile() {
     );
   }
 
-  // const imageProfile = `https://api.skill-shaker.com/api/user/info/${infos.image}`;
-  // console.log(infos);
+  const imageProfile = infos
+    ? `https://api.skill-shaker.com/api/user/info/${infos.image}`
+    : "https://picsum.photos/70/70";
+
+  // console.log(imageProfile);
+
   return (
     <>
-      <div>
-        <div className="list">
-          <ul>
-            <li>
-              <div className="profile user">
-                <div
-                  className="profileIcon"
-                  onClick={() => setOpenMenu((prev) => !prev)}
-                >
-                  <HiDotsVertical />
-                  {openMenu && (
-                    <>
-                      <ul className="menuProfile">
-                        <li>
-                          <button type="button" onClick={handleModalOpen}>
-                            Mon profil
-                          </button>
-                        </li>
-                        <li>
-                          <button type="button" onClick={handleLogOut}>
-                            Déconnexion
-                          </button>
-                        </li>
-                      </ul>
-                    </>
-                  )}
-                </div>
-                <div className="picture">
-                  <img
-                    src="https://picsum.photos/70/70"
-                    alt="Photo de profil"
-                    className="profilePicture"
-                  />
-                </div>
-                <div className="informationsSection">
-                  <div className="informations">
-                    <p className="name">
-                      {infos ? infos.firstname : "Loading..."}
-                    </p>
-                    {/* substr à faire ici  */}
-                    <p className="email">
-                      {infos ? infos.description : "Loading..."}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
+      <div className="background-profile"></div>
+      <div className="profile user">
+        <div
+          className="profileIcon"
+          onClick={() => setOpenMenu((prev) => !prev)}
+        >
+          <HiDotsVertical />
+          {openMenu && (
+            <>
+              <ul className="menuProfile">
+                <li>
+                  <button type="button" onClick={handleModalOpen}>
+                    Mon profil
+                  </button>
+                </li>
+                <li>
+                  <button type="button" onClick={handleLogOut}>
+                    Déconnexion
+                  </button>
+                </li>
+              </ul>
+            </>
+          )}
+        </div>
+        <div className="picture">
+          <img
+            src="https://picsum.photos/70/70"
+            alt="Photo de profil"
+            className="profilePicture"
+          />
+        </div>
+        <div className="informationsSection">
+          <div className="informations">
+            <p className="name">{infos ? infos.firstname : "None"}</p>
+            <p className="email">{infos ? infos.description : "None"}</p>
+          </div>
         </div>
       </div>
-      <Modal isOpen={isModalOpen} onClose={handleModalClose} />
+      {isModalOpen && <Modal onClose={handleModalClose} />}
     </>
   );
 }
