@@ -1,7 +1,7 @@
 import { HiDotsVertical } from "react-icons/hi";
 import Menu from "./menuConversations";
 import axios from "axios";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 
 // CONTEXT
 import User from "../../../contexts/userContext";
@@ -10,6 +10,19 @@ export default function List() {
   // CONTEXT
   const { user } = useContext(User);
   const [openMenu, setOpenMenu] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   // API
   const [conversations, setConversations] = useState([]);
@@ -44,7 +57,7 @@ export default function List() {
   return (
     <>
       <h2>Conversations</h2>
-      <div className="list">
+      <div className="list" ref={ref}>
         <ul>
           <li>
             <div className="profile">

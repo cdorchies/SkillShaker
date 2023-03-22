@@ -2,7 +2,7 @@ import axios from "axios";
 import Modal from "../../modals/editProfile/index";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 
 // CONTEXT
@@ -14,6 +14,7 @@ export default function Profile() {
 
   // MENU - DECONNEXION
   const [openMenu, setOpenMenu] = useState(false);
+  const ref = useRef(null);
 
   const handleLogOut = () => {
     setUser(null);
@@ -34,6 +35,18 @@ export default function Profile() {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   // API
   const [infos, setInfos] = useState(null);
@@ -89,7 +102,7 @@ export default function Profile() {
   return (
     <>
       <div className="background-profile"></div>
-      <div className="profile user">
+      <div className="profile user" ref={ref}>
         <div
           className="profileIcon"
           onClick={() => setOpenMenu((prev) => !prev)}

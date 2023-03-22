@@ -4,7 +4,8 @@ import { RiMessage2Fill } from "react-icons/ri";
 import Menu from "./menuMessage";
 import Message from "./message";
 import axios from "axios";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
+
 // import io from "socket.io-client";
 
 // CONTEXT
@@ -13,11 +14,32 @@ import User from "../../../contexts/userContext";
 export default function MessagesList() {
   // CONTEXT
   const { user } = useContext(User);
-  const [openMenu, setOpenMenu] = useState(false);
-  const handleOpenMenu = () => {
-    setOpenMenu((prev) => !prev);
-    console.log(openMenu);
+  const ref = useRef(null);
+
+  // MENU
+  const [openMenu, setOpenMenu] = useState([]);
+
+  const handleSubMenuToggle = (messageId) => {
+    if (openMenu.includes(messageId)) {
+      setOpenMenu(openMenu.filter((id) => id !== messageId));
+    } else {
+      setOpenMenu([...openMenu, messageId]);
+    }
   };
+
+  useEffect(() => {
+    // écoute les clics sur la page
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpenMenu([]);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   // API
   const [messages, setMessages] = useState([]);
@@ -70,10 +92,14 @@ export default function MessagesList() {
           <Message />
         </div>
         {messages ? (
-          messages.map((message, index) => {
+          messages.map((message) => {
             let msg = message.message;
             return (
-              <div className="messageUser" key={`message-${index}`}>
+              <div
+                className="messageUser"
+                key={`message-${message.id}`}
+                ref={ref}
+              >
                 <div className="profilePic">
                   <img
                     src="https://picsum.photos/70/70"
@@ -88,15 +114,17 @@ export default function MessagesList() {
                     </div>
                     <div className="hourMessage">
                       {message.created_at.date.slice(11, 16)}{" "}
-                      <span onClick={handleOpenMenu}>
+                      <span onClick={() => handleSubMenuToggle(message.id)}>
                         <HiDotsVertical />
                       </span>
-                      {openMenu && <Menu />}
+                      {openMenu.includes(message.id) && (
+                        <Menu menuId={message.id} />
+                      )}
                     </div>
                   </div>
                   <div className="fullMessage">
                     <p
-                      key={index}
+                      key={message.id}
                       dangerouslySetInnerHTML={{
                         __html: msg.replace(
                           /#\w+/g,

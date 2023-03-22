@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { useState, useContext, useEffect } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { CgPhone } from "react-icons/cg";
-import { IoImage } from "react-icons/io5";
 import { MdDescription } from "react-icons/md";
 import "./index.scss";
 
@@ -81,20 +80,6 @@ export default function ProfileForm(props) {
         </button>
         <form action="" id="Form-Profil">
           {error !== "" ? <div className="error">{error}</div> : ""}
-          {/* <div>
-            <label htmlFor="profilImg">
-              <IoImage />{" "}
-              <span className="span-edit-profile">Image de profil</span>
-              <input
-                className="edit-input"
-                type="file"
-                name="profilImg"
-                onChange={(e) =>
-                  setInfos({ ...infos, profilImg: e.target.value })
-                }
-              />
-            </label>
-          </div> */}
           <div>
             <label htmlFor="firstname">
               <BsFillPersonFill />{" "}

@@ -1,6 +1,6 @@
-export default function MenuConversations(props) {
+export default function MenuConversations() {
   return (
-    <ul className="menuMessage" key={props.index}>
+    <ul className="menuMessage">
       <li>Signaler le message</li>
       <li>Signaler l'utilisateur</li>
       <li>Bloquer l'utilisateur</li>
