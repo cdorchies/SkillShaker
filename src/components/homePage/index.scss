@@ -277,6 +277,19 @@
           }
         }
       }
+      button.load-more {
+        background-color: $skillshaker-red-color;
+        margin: 0 auto;
+        display: block;
+        border: none;
+        color: $light;
+        font-size: 15px;
+        padding: 5px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+        }
+      }
       .no-new-messages {
         text-align: center;
       }

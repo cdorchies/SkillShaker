@@ -43,6 +43,11 @@ export default function MessagesList() {
 
   // API
   const [messages, setMessages] = useState([]);
+  const [visibleMessages, setVisibleMessages] = useState(1);
+  const handleShowMore = () => {
+    setVisibleMessages((prevState) => prevState + 1);
+  };
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -92,67 +97,76 @@ export default function MessagesList() {
           <Message />
         </div>
         {messages ? (
-          messages.map((message) => {
+          messages.slice(0, visibleMessages).map((message) => {
             let msg = message.message;
             return (
-              <div
-                className="messageUser"
-                key={`message-${message.id}`}
-                ref={ref}
-              >
-                <div className="profilePic">
-                  <img
-                    src="https://picsum.photos/70/70"
-                    alt="Photo de profil"
-                    className="profilePicture"
-                  />
-                </div>
-                <div className="messageBody">
-                  <div className="infosUser">
-                    <div className="infoUserName">
-                      {message.author_firstname}
-                    </div>
-                    <div className="hourMessage">
-                      {message.created_at.date.slice(11, 16)}{" "}
-                      <span onClick={() => handleSubMenuToggle(message.id)}>
-                        <HiDotsVertical />
-                      </span>
-                      {openMenu.includes(message.id) && (
-                        <Menu menuId={message.id} />
-                      )}
-                    </div>
+              <>
+                <div
+                  className="messageUser"
+                  key={`message-${message.id}`}
+                  ref={ref}
+                >
+                  <div className="profilePic">
+                    <img
+                      src="https://picsum.photos/70/70"
+                      alt="Photo de profil"
+                      className="profilePicture"
+                    />
                   </div>
-                  <div className="fullMessage">
-                    <p
-                      key={message.id}
-                      dangerouslySetInnerHTML={{
-                        __html: msg.replace(
-                          /#\w+/g,
-                          '<span class="hashtag">$&</span>'
-                        ),
-                      }}
-                    ></p>
-                  </div>
-                  <div className="peopleTags">
-                    <div className="peopleFollowing">
-                      <BsPeopleFill />{" "}
-                      {message.conversation
-                        ? message.conversation.map((msg, index) => {
-                            return (
-                              <span key={index}>{msg.nb_users.toString()}</span>
-                            );
-                          })
-                        : "0"}
-                      /{message.audience}
-                    </div>
-                    {message.conversation ? (
-                      <div className="sendMessage">
-                        <RiMessage2Fill />
+                  <div className="messageBody">
+                    <div className="infosUser">
+                      <div className="infoUserName">
+                        {message.author_firstname}
                       </div>
-                    ) : null}
+                      <div className="hourMessage">
+                        {message.created_at.date.slice(11, 16)}{" "}
+                        <span onClick={() => handleSubMenuToggle(message.id)}>
+                          <HiDotsVertical />
+                        </span>
+                        {openMenu.includes(message.id) && (
+                          <Menu menuId={message.id} />
+                        )}
+                      </div>
+                    </div>
+                    <div className="fullMessage">
+                      <p
+                        key={message.id}
+                        dangerouslySetInnerHTML={{
+                          __html: msg.replace(
+                            /#\w+/g,
+                            '<span class="hashtag">$&</span>'
+                          ),
+                        }}
+                      ></p>
+                    </div>
+                    <div className="peopleTags">
+                      <div className="peopleFollowing">
+                        <BsPeopleFill />{" "}
+                        {message.conversation
+                          ? message.conversation.map((msg, index) => {
+                              return (
+                                <span key={index}>
+                                  {msg.nb_users.toString()}
+                                </span>
+                              );
+                            })
+                          : "0"}
+                        /{message.audience}
+                      </div>
+                      {message.conversation ? (
+                        <div className="sendMessage">
+                          <RiMessage2Fill />
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
-              </div>
+                {visibleMessages < messages.length && (
+                  <button className="load-more" onClick={handleShowMore}>
+                    Voir plus
+                  </button>
+                )}
+              </>
             );
           })
         ) : (
