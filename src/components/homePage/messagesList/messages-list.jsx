@@ -72,7 +72,7 @@ export default function MessagesList() {
   if (typeof Storage !== "undefined") {
     if (messages.length === 0) {
       let messageFeed = localStorage.getItem("messageFeed");
-      if (messageFeed != undefined || messageFeed != null) {
+      if (messageFeed !== undefined || messageFeed !== null) {
         setMessages(JSON.parse(messageFeed));
       }
     } else {
@@ -143,9 +143,9 @@ export default function MessagesList() {
                       <div className="peopleFollowing">
                         <BsPeopleFill />{" "}
                         {message.conversation
-                          ? message.conversation.map((msg, index) => {
+                          ? message.conversation.map((msg) => {
                               return (
-                                <span key={index}>
+                                <span key={message.id}>
                                   {msg.nb_users.toString()}
                                 </span>
                               );
