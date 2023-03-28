@@ -21,6 +21,7 @@ export default function Profile() {
     const authToken = Cookies.get("auth_token");
     if (authToken) {
       Cookies.remove("auth_token");
+      localStorage.removeItem("userToken");
     }
     toast.info(`Déconnexion...`);
     window.location.href = "/";
