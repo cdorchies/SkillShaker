@@ -25,7 +25,7 @@ export default function List() {
   }, [ref]);
 
   // API
-  const [conversations, setConversations] = useState([]);
+  const [setConversations] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function List() {
           setError("Une erreur est survenue...");
         });
     }
-  }, []);
+  }, [user, setConversations]);
 
   if (error) {
     return (
@@ -64,7 +64,7 @@ export default function List() {
               <div className="picture">
                 <img
                   src="https://picsum.photos/50/50"
-                  alt="Photo de profil"
+                  alt=""
                   className="profilePicture"
                 />
               </div>

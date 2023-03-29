@@ -6,8 +6,6 @@ import Message from "./message";
 import axios from "axios";
 import { useState, useContext, useEffect, useRef } from "react";
 
-// import io from "socket.io-client";
-
 // CONTEXT
 import User from "../../../contexts/userContext";
 
@@ -66,7 +64,7 @@ export default function MessagesList() {
           setError("Une erreur est survenue...");
         });
     }
-  }, []);
+  }, [user]);
 
   // LOCAL STORAGE
   if (typeof Storage !== "undefined") {
@@ -109,7 +107,7 @@ export default function MessagesList() {
                   <div className="profilePic">
                     <img
                       src="https://picsum.photos/70/70"
-                      alt="Photo de profil"
+                      alt=""
                       className="profilePicture"
                     />
                   </div>

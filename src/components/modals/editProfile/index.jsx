@@ -27,7 +27,7 @@ export default function ProfileForm(props) {
           setInfos(data);
         });
     }
-  }, []);
+  }, [user]);
 
   // EDIT
   const editMyprofil = (e) => {
@@ -58,7 +58,7 @@ export default function ProfileForm(props) {
   if (typeof Storage !== "undefined") {
     if (infos === undefined || infos === null) {
       let infoGet = localStorage.getItem("infosEditProfile");
-      if (infoGet != undefined || infoGet != null) {
+      if (infoGet !== undefined || infoGet !== null) {
         setInfos(JSON.parse(infoGet));
       }
     } else {

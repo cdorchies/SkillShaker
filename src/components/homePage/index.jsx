@@ -1,14 +1,14 @@
-import User from "../../contexts/userContext";
+// import User from "../../contexts/userContext";
 import Cookies from "js-cookie";
 import MessagesList from "./messagesList/messages-list";
 import Conversations from "./conversations";
 import Tags from "./tags";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+// import { useContext } from "react";
 import "./index.scss";
 
 export default function HomePage() {
-  const { user } = useContext(User);
+  // const { user } = useContext(User);
   const authToken = Cookies.get("auth_token");
 
   return (

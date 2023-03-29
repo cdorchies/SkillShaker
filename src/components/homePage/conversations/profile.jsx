@@ -53,30 +53,28 @@ export default function Profile() {
   const [infos, setInfos] = useState(null);
   const [error, setError] = useState(null);
 
-  async function fetchData() {
-    const response = await axios
-      .get(`${process.env.REACT_APP_API_URL}/user/info`, {
-        headers: {
-          Authorization: "Bearer " + user.token,
-        },
-      })
-      .catch(() => {
-        setError("Une erreur est survenue...");
-      });
-    setInfos(response.data);
-  }
-
   useEffect(() => {
     if (user) {
-      fetchData();
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/user/info`, {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        })
+        .catch(() => {
+          setError("Une erreur est survenue...");
+        })
+        .then(({ data }) => {
+          setInfos(data);
+        });
     }
-  }, []);
+  }, [user]);
 
   // LOCAL STORAGE
   if (typeof Storage !== "undefined") {
     if (infos === undefined || infos === null) {
       let infoGet = localStorage.getItem("info");
-      if (infoGet != undefined || infoGet != null) {
+      if (infoGet !== undefined || infoGet !== null) {
         setInfos(JSON.parse(infoGet));
       }
     } else {
@@ -94,9 +92,9 @@ export default function Profile() {
     );
   }
 
-  const imageProfile = infos
-    ? `https://api.skill-shaker.com/api/user/info/${infos.image}`
-    : "https://picsum.photos/70/70";
+  // const imageProfile = infos
+  //   ? `https://api.skill-shaker.com/api/user/info/${infos.image}`
+  //   : "https://picsum.photos/70/70";
 
   // console.log(imageProfile);
 
@@ -129,7 +127,7 @@ export default function Profile() {
         <div className="picture">
           <img
             src="https://picsum.photos/70/70"
-            alt="Photo de profil"
+            alt=""
             className="profilePicture"
           />
         </div>

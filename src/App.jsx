@@ -8,7 +8,7 @@ import Header from "./components/templates/header";
 import Login from "./components/authentification/login";
 import Register from "./components/authentification/register";
 import Password from "./components/authentification/password";
-import HomePage from "./components//homePage";
+import HomePage from "./components/homePage";
 import Footer from "./components/templates/footer";
 import "./app.scss";
 import { MdOutlineNightlight, MdOutlineLightMode } from "react-icons/md";

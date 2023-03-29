@@ -22,25 +22,11 @@ export default function Suggested() {
   const [tags, setTags] = useState([]);
   const [error, setError] = useState(null);
 
-  async function fetchData() {
-    const response = await axios
-      .get(`${process.env.REACT_APP_API_URL}/tagUser/get`, {
-        headers: {
-          Authorization: "Bearer " + user.token,
-        },
-      })
-      .catch(() => {
-        setError("Une erreur est survenue...");
-      });
-    setTags(response.data.suggTags);
-  }
-
-
   // LOCAL STORAGE
   if (typeof Storage !== "undefined") {
     if (tags.length === 0) {
       let suggestedTags = localStorage.getItem("suggestedTags");
-      if (suggestedTags != undefined || suggestedTags != null) {
+      if (suggestedTags !== undefined || suggestedTags !== null) {
         setTags(JSON.parse(suggestedTags));
       }
     } else {
@@ -52,9 +38,20 @@ export default function Suggested() {
 
   useEffect(() => {
     if (user) {
-      fetchData();
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/tagUser/get`, {
+          headers: {
+            Authorization: "Bearer " + user.token,
+          },
+        })
+        .catch(() => {
+          setError("Une erreur est survenue...");
+        })
+        .then(({ data }) => {
+          setTags(data.suggTags);
+        });
     }
-  }, []);
+  }, [user]);
 
   if (error) {
     return (
