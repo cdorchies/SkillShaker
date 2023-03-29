@@ -39,7 +39,7 @@ export default function App() {
   if (typeof Storage !== "undefined") {
     if (user === undefined || user === null) {
       let infoGet = localStorage.getItem("userToken");
-      if (infoGet !== undefined || infoGet !== null) {
+      if (infoGet !== undefined && infoGet !== null) {
         setUser(JSON.parse(infoGet));
       }
     } else {

@@ -46,13 +46,13 @@ export default function List() {
     }
   }, [user, setConversations]);
 
-  if (error) {
-    return (
-      <div>
-        <p>Une erreur est survenue... réessayez plus tard !</p>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div>
+  //       <p>Une erreur est survenue... réessayez plus tard !</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

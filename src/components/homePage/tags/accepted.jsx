@@ -43,7 +43,7 @@ export default function Suggested() {
   if (typeof Storage !== "undefined") {
     if (tags.length === 0) {
       let acceptedTags = localStorage.getItem("acceptedTags");
-      if (acceptedTags !== undefined || acceptedTags !== null) {
+      if (acceptedTags !== undefined && acceptedTags !== null) {
         setTags(JSON.parse(acceptedTags));
       }
     } else {

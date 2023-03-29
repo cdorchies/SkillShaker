@@ -74,7 +74,7 @@ export default function Profile() {
   if (typeof Storage !== "undefined") {
     if (infos === undefined || infos === null) {
       let infoGet = localStorage.getItem("info");
-      if (infoGet !== undefined || infoGet !== null) {
+      if (infoGet !== undefined && infoGet !== null) {
         setInfos(JSON.parse(infoGet));
       }
     } else {

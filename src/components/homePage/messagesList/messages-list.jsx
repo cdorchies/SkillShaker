@@ -70,7 +70,7 @@ export default function MessagesList() {
   if (typeof Storage !== "undefined") {
     if (messages.length === 0) {
       let messageFeed = localStorage.getItem("messageFeed");
-      if (messageFeed !== undefined || messageFeed !== null) {
+      if (messageFeed !== undefined && messageFeed !== null) {
         setMessages(JSON.parse(messageFeed));
       }
     } else {

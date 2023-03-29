@@ -58,9 +58,10 @@ export default function ProfileForm(props) {
   if (typeof Storage !== "undefined") {
     if (infos === undefined || infos === null) {
       let infoGet = localStorage.getItem("infosEditProfile");
-      if (infoGet !== undefined || infoGet !== null) {
+      if (infoGet !== undefined && infoGet !== null) {
         setInfos(JSON.parse(infoGet));
       }
+      console.log("yyy");
     } else {
       localStorage.setItem("infosEditProfile", JSON.stringify(infos));
     }
